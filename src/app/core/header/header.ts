@@ -6,4 +6,11 @@ import { Component } from '@angular/core';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {}
+export class Header {
+  titulo = "Loja TP1 2026";
+
+  exibirMensgem(msg:string):void{
+    alert(msg);
+}
+}
+

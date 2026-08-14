@@ -1,9 +1,9 @@
 <header class="header">
     <img src="images/logoifsp.png" alt="logo ifsp">
-    <h1>{{titulo}}</h1>
+    <h1>{{titulo()}}</h1>
     <nav>
         <a href="#">Home</a>
         <a href="#">Produtos</a>
-        <a href="#" (click)="exibirMensgem('teste listener')">Sobree</a>
+        <a href="#" (click)="enviarSobre()">Sobre</a>
     </nav>
 </header>

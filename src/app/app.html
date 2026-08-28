@@ -2,6 +2,13 @@
 <app-header [titulo]="title()"
  (textoSobre)="receberSobre($event)"></app-header>
 <main class="container">
+    <!-- renderiza valor se par -->
+    @if(x() % 2 == 0){ 
+        <h1>Produtos Ofertados</h1>
+    }
+    @else if (true) {
+        
+    }
     <app-lista-produtos></app-lista-produtos>
     <!-- <h2>Angular - Aula 02</h2> -->
     <!-- <app-card-produto [produto]="produto"></app-card-produto> -->

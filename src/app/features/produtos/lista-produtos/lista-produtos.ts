@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Produto } from '../../../model/produto';
 import { CardProduto } from "../card-produto/card-produto";
 
@@ -9,6 +9,19 @@ import { CardProduto } from "../card-produto/card-produto";
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
+
+  apenasPromo = signal(false);
+
+  produtosExibidos = computed(() => 
+    this.apenasPromo()
+    ? this.produtos.filter(p => p.promo)
+    : this.produtos
+  );
+
+  alternarPromo(){
+    this.apenasPromo.update(v => !v);
+  }
+
   produtos = <Produto[]>[
     {
       id: 1,
@@ -16,7 +29,8 @@ export class ListaProdutos {
       preco: 899.99,
       descricao: 'Mouse gamer profissional superleve, indicado para Atletas de E-sports e Pro Players',
       imageUrl: 'images/card-produto/mouse.png',
-      promo: false
+      promo: false,
+      estado: 'novo'
     },
     {
       id: 2,
@@ -24,7 +38,8 @@ export class ListaProdutos {
       preco: 11399.99,
       descricao: 'Monitor de alto desempenho destinado a jogadores profissionais',
       imageUrl: 'images/card-produto/zowie.png',
-      promo: false
+      promo: false,
+      estado: 'esgotado'
     },
     {
       id: 3,
@@ -32,7 +47,17 @@ export class ListaProdutos {
       preco: 12999.99,
       descricao: 'Conforto no dia-a-dia para jogar ou trabalhar',
       imageUrl: 'images/card-produto/cadeira.png',
-      promo: true
+      promo: true,
+      estado: 'usado'
+    },
+    {
+      id: 4,
+      nome: 'Headset Gamer Logitech Astro A20 X, RGB, Drivers 40mm, Bluetooth, Preto, 939-002246',
+      preco: 1349.99,
+      descricao: 'Imersão auditiva de alto nível',
+      imageUrl: 'images/card-produto/headset.jpg',
+      promo: true,
+      estado: 'novo'
     },
   ];
 

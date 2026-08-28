@@ -18,7 +18,7 @@ export class App {
   protected readonly title = signal('Loja TP1 - 2026');
   sobre?: string;
 
-  
+  x = signal(10);//renderiza valor se par
 
   receberSobre(msg: string):void{
     this.sobre=msg;

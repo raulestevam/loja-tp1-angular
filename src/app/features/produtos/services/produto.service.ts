@@ -1,7 +1,7 @@
 import { inject, Service } from '@angular/core';
-import { LoggerService } from '../../../core/logger/logger.service';
 import { Produto } from '../../../model/produto';
 import { delay, Observable, of } from 'rxjs';
+import { LoggerService } from '../../../core/services/logger/logger.service';
 
 @Service()
 export class ProdutoService {

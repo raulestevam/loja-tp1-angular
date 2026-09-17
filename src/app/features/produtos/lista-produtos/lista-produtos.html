@@ -11,12 +11,12 @@
             Promoções
         }</button>
     </header>
-    @if (produtosExibidos().length == 0) {
+    @if (produtoExibidos().length == 0) {
         <p class="vazio">Nenhum produto encontrado</p>
     }
     @else {
         <div class="grid">
-            @for(prod of produtosExibidos(); track prod.id){
+            @for(prod of produtoExibidos(); track prod.id){
                 <app-card-produto
                     [produto]="prod"
                     (add)="onAddProduct($event)"

@@ -1,12 +1,15 @@
 import { inject, Service } from '@angular/core';
-import { Produto } from '../../../model/produto';
-import { delay, Observable, of } from 'rxjs';
+import { Produto, ProdutoMapper } from '../../../model/produto';
+import { catchError, delay, map, Observable, of } from 'rxjs';
 import { LoggerService } from '../../../core/services/logger/logger.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Service()
 export class ProdutoService {
     private logger = inject(LoggerService);
+    private http = inject(HttpClient);
+    private apiUrl = 'https://fakestoreapi.com/products';
 
   private readonly listaMock = <Produto[]>[
     {
@@ -49,12 +52,17 @@ export class ProdutoService {
 
     listar(): Observable<Produto[]>{
         this.logger.info("[PRODUTO SERVICE] - Retornando lista de produtos");
-        return of(this.listaMock).pipe(
-            delay(250)
-        );
+        return this.http.get<any[]>(this.apiUrl).pipe(
+          map(lista => lista.map(prod => ProdutoMapper.fromJson(prod))),
+          catchError(erro => {
+            this.logger.error("[PRODUTO SERVICE] - Erro ao listar produtos");
+            return of([])
+          })
+        )
     }
 
     getById(id: number): Observable<Produto | undefined>{
+      //exercicio
       return of(this.listaMock.find(p => p.id == id)).pipe(delay(500));
     } 
 }

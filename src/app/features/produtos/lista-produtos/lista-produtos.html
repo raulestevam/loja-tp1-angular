@@ -11,7 +11,10 @@
             Promoções
         }</button>
     </header>
-    @if (produtoExibidos().length == 0) {
+    @if(carregando()){
+        <p>Carregando Produtos</p>
+    }
+    @else if (produtoExibidos().length == 0) {
         <p class="vazio">Nenhum produto encontrado</p>
     }
     @else {

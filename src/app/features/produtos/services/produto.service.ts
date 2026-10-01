@@ -34,4 +34,8 @@ export class ProdutoService {
         return of(undefined);
       }));
     }
+
+    criar(produto: Produto):Observable<any>{
+      return this.http.post(this.apiUrl, ProdutoMapper.toJson(produto));
+    }
 }

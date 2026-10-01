@@ -24,12 +24,14 @@ export class ProdutoService {
       )
     }
 
-    getById(id: number): Observable<Produto | undefined>{
-      //exercicio
-      return of();
+     getById(id: number): Observable<Produto | undefined>{
+    if (!Number.isInteger(id) || id <=0) {
+      return of(undefined);
     }
-    
-    criar(produto: Produto):Observable<any>{
-      return this.http.post(this.apiUrl, ProdutoMapper.toJson(produto));
+    return this.http.get<Produto>(`${this.apiUrl}/${id}`).pipe(map(produto => ProdutoMapper.fromJson(produto)),
+      catchError(erro => {
+        this.logger.error(`[Produto Service] - Erro ao buscar produto ${id}`);
+        return of(undefined);
+      }));
     }
 }
